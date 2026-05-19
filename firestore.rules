@@ -1,0 +1,65 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function userDoc() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data;
+    }
+
+    function isManager() {
+      return isSignedIn() && userDoc().role == 'manager';
+    }
+
+    function isOwner(uid) {
+      return isSignedIn() && request.auth.uid == uid;
+    }
+
+    // ── Users ─────────────────────────────────────────────────────────────
+    match /users/{userId} {
+      allow read: if isSignedIn();
+      allow create: if isManager();
+      allow update: if isManager() || isOwner(userId);
+      allow delete: if isManager();
+    }
+
+    // ── Schedules ─────────────────────────────────────────────────────────
+    match /schedules/{scheduleId} {
+      allow read: if isSignedIn();
+      allow create, update, delete: if isManager();
+    }
+
+    // ── Shifts ────────────────────────────────────────────────────────────
+    match /shifts/{shiftId} {
+      allow read: if isSignedIn();
+      allow create, update, delete: if isManager();
+    }
+
+    // ── Shift Requests ────────────────────────────────────────────────────
+    match /shiftRequests/{requestId} {
+      allow read: if isSignedIn();
+      // Any authenticated employee can submit a request
+      allow create: if isSignedIn() && request.resource.data.requestedBy == request.auth.uid;
+      // Only managers can update status (approve/deny)
+      allow update: if isManager();
+      allow delete: if isManager();
+    }
+
+    // ── Availability ──────────────────────────────────────────────────────
+    match /availability/{availabilityId} {
+      allow read: if isSignedIn();
+      allow create: if isSignedIn() && request.resource.data.employeeId == request.auth.uid;
+      allow update: if isManager() || isOwner(resource.data.employeeId);
+      allow delete: if isManager();
+    }
+
+    // ── Announcements ─────────────────────────────────────────────────────
+    match /announcements/{announcementId} {
+      allow read: if isSignedIn();
+      allow create, update, delete: if isManager();
+    }
+  }
+}
