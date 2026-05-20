@@ -1,4 +1,4 @@
-import { useAuth } from '../../contexts/AuthContext';
+﻿import { useAuth } from '../../contexts/AuthContext';
 
 export default function Navbar() {
   const { userProfile, logout } = useAuth();
@@ -9,7 +9,7 @@ export default function Navbar() {
       <div className="flex items-center gap-4">
         <div className="text-sm text-gray-600">
           <span className="font-medium text-gray-800">{userProfile?.displayName}</span>
-          <span className="ml-2 inline-block px-2 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-700 capitalize">
+          <span className="ml-2 inline-block px-2 py-0.5 rounded text-xs font-medium bg-blue-100 text-blue-700 capitalize">
             {userProfile?.role}
           </span>
         </div>

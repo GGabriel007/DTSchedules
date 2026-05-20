@@ -30,7 +30,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       if (user) {
         const snap = await getDoc(doc(db, 'users', user.uid));
         if (snap.exists()) {
-          setUserProfile({ uid: snap.id, ...snap.data() } as AppUser);
+          const data = snap.data();
+          setUserProfile({
+            uid: snap.id,
+            ...data,
+            role: (data.role as string)?.toLowerCase() as AppUser['role'],
+          } as AppUser);
         }
       } else {
         setUserProfile(null);

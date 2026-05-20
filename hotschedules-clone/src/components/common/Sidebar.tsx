@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+﻿import { NavLink } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 
 interface NavItem {
@@ -9,18 +9,18 @@ interface NavItem {
 
 const employeeLinks: NavItem[] = [
   { to: '/', label: 'Dashboard', icon: '⊞' },
-  { to: '/my-schedule', label: 'My Schedule', icon: '📅' },
+  { to: '/my-schedule', label: 'My Schedule', icon: '—' },
   { to: '/shift-requests', label: 'Shift Requests', icon: '↔' },
   { to: '/availability', label: 'Availability', icon: '✓' },
-  { to: '/announcements', label: 'Announcements', icon: '📣' },
+  { to: '/announcements', label: 'Announcements', icon: '—' },
 ];
 
 const managerLinks: NavItem[] = [
   { to: '/', label: 'Dashboard', icon: '⊞' },
-  { to: '/schedule', label: 'Manage Schedule', icon: '📋' },
+  { to: '/schedule', label: 'Manage Schedule', icon: '—' },
   { to: '/shift-requests', label: 'Requests', icon: '↔' },
   { to: '/availability', label: 'Availability', icon: '✓' },
-  { to: '/announcements', label: 'Announcements', icon: '📣' },
+  { to: '/announcements', label: 'Announcements', icon: '—' },
   { to: '/create-employee', label: 'Add Employee', icon: '＋' },
 ];
 
@@ -41,7 +41,7 @@ export default function Sidebar() {
             to={to}
             end={to === '/'}
             className={({ isActive }) =>
-              `flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${
+              `flex items-center gap-3 px-3 py-2.5 rounded text-sm font-medium transition-colors ${
                 isActive
                   ? 'bg-blue-600 text-white'
                   : 'text-slate-400 hover:bg-slate-800 hover:text-white'

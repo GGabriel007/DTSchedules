@@ -1,4 +1,4 @@
-import { useState, type FormEvent } from 'react';
+﻿import { useState, type FormEvent } from 'react';
 import { httpsCallable } from 'firebase/functions';
 import { functions } from '../lib/firebase';
 import type { UserRole } from '../types';
@@ -57,17 +57,17 @@ export default function CreateEmployee() {
       </div>
 
       {status === 'success' && (
-        <div className="mb-4 px-4 py-3 bg-green-50 border border-green-200 rounded-lg text-green-700 text-sm">
+        <div className="mb-4 px-4 py-3 bg-green-50 border border-green-200 rounded text-green-700 text-sm">
           {message}
         </div>
       )}
       {status === 'error' && (
-        <div className="mb-4 px-4 py-3 bg-red-50 border border-red-200 rounded-lg text-red-700 text-sm">
+        <div className="mb-4 px-4 py-3 bg-red-50 border border-red-200 rounded text-red-700 text-sm">
           {message}
         </div>
       )}
 
-      <form onSubmit={handleSubmit} className="bg-white rounded-xl border border-gray-200 p-6 space-y-4">
+      <form onSubmit={handleSubmit} className="bg-white rounded border border-gray-200 p-6 space-y-4">
         <Field label="Full Name" name="displayName" type="text" value={form.displayName} onChange={handleChange} placeholder="Jane Smith" required />
         <Field label="Email" name="email" type="email" value={form.email} onChange={handleChange} placeholder="jane@restaurant.com" required />
         <Field label="Temporary Password" name="password" type="password" value={form.password} onChange={handleChange} placeholder="Min. 6 characters" required />
@@ -77,7 +77,7 @@ export default function CreateEmployee() {
           <div>
             <label className="block text-sm font-medium text-slate-700 mb-1.5">Position</label>
             <select name="position" value={form.position} onChange={handleChange} required
-              className="w-full px-3.5 py-2.5 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none">
+              className="w-full px-3.5 py-2.5 border border-gray-300 rounded text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none">
               <option value="">Select position</option>
               {POSITIONS.map((p) => <option key={p} value={p}>{p}</option>)}
             </select>
@@ -85,7 +85,7 @@ export default function CreateEmployee() {
           <div>
             <label className="block text-sm font-medium text-slate-700 mb-1.5">Role</label>
             <select name="role" value={form.role} onChange={handleChange}
-              className="w-full px-3.5 py-2.5 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none">
+              className="w-full px-3.5 py-2.5 border border-gray-300 rounded text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none">
               <option value="employee">Employee</option>
               <option value="manager">Manager</option>
             </select>
@@ -93,7 +93,7 @@ export default function CreateEmployee() {
         </div>
 
         <button type="submit" disabled={status === 'loading'}
-          className="w-full mt-2 bg-blue-600 hover:bg-blue-700 disabled:opacity-60 text-white font-semibold py-2.5 rounded-lg text-sm transition-colors">
+          className="w-full mt-2 bg-blue-600 hover:bg-blue-700 disabled:opacity-60 text-white font-semibold py-2.5 rounded text-sm transition-colors">
           {status === 'loading' ? 'Creating account…' : 'Create Employee Account'}
         </button>
       </form>
@@ -122,7 +122,7 @@ function Field({ label, name, type, value, onChange, placeholder, required }: Fi
         onChange={onChange}
         placeholder={placeholder}
         required={required}
-        className="w-full px-3.5 py-2.5 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
+        className="w-full px-3.5 py-2.5 border border-gray-300 rounded text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition"
       />
     </div>
   );
